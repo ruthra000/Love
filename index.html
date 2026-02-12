@@ -35,6 +35,13 @@ img{
     margin-bottom:15px;
 }
 
+input{
+    padding:10px;
+    border-radius:10px;
+    border:none;
+    margin:10px;
+}
+
 button{
     padding:10px 20px;
     margin:10px;
@@ -55,10 +62,8 @@ button{
     position:relative;
 }
 
-.playbtn{
-    background:#ffffff;
-    color:#ff416c;
-    font-weight:bold;
+.hidden{
+    display:none;
 }
 
 @keyframes float{
@@ -70,51 +75,51 @@ button{
 
 <body>
 
-<div class="container">
+<!-- PASSWORD SCREEN -->
+<div class="container" id="lockScreen">
+    <h2>🔐 Enter Our Secret Password</h2>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <br>
+    <button onclick="checkPassword()">Unlock ❤️</button>
+</div>
 
+<!-- MAIN CONTENT -->
+<div class="container hidden" id="mainContent">
     <img id="slideshow" src="IMG-20251210-WA0006.jpg">
-
     <h1>For My Love ❤️</h1>
     <p>You mean the world to me ❤️ - Your Boy</p>
     <h2>Will you be mine forever? 💍</h2>
 
     <button class="yes" onclick="sayYes()">YES 💖</button>
     <button class="no" id="noBtn" onmouseover="moveNo()">NO 😜</button>
-
-    <br>
-    <button class="playbtn" onclick="playMusic()">🎵 Play Our Song</button>
-
 </div>
 
 <!-- AUDIO -->
-<audio id="bgMusic" loop>
-  <source src="Neelothi.mp3" type="audio/mpeg">
-</audio>
+<audio id="bgMusic" src="Neelothi.mp3" loop preload="auto"></audio>
 
 <script>
 
-/* PLAY MUSIC */
-function playMusic(){
-  const music = document.getElementById("bgMusic");
-  music.play();
+/* PASSWORD CHECK */
+function checkPassword(){
+    var pass = document.getElementById("passwordInput").value;
+    
+    if(pass === "143"){
+        document.getElementById("lockScreen").classList.add("hidden");
+        document.getElementById("mainContent").classList.remove("hidden");
+
+        // PLAY SONG AFTER UNLOCK
+        document.getElementById("bgMusic").play();
+    }else{
+        alert("Wrong Password 😜");
+    }
 }
 
 /* YES BUTTON */
 function sayYes(){
   alert("Yayyy ❤️ I love youuuuu 😘");
 
-  const loveText = document.createElement("h1");
-  loveText.innerText = "I LOVE YOU ❤️";
-  loveText.style.position = "fixed";
-  loveText.style.top = "40%";
-  loveText.style.left = "50%";
-  loveText.style.transform = "translate(-50%, -50%)";
-  loveText.style.fontSize = "40px";
-  loveText.style.zIndex = "9999";
-  document.body.appendChild(loveText);
-
   for(let i=0;i<30;i++){
-    const spark = document.createElement("div");
+    const spark=document.createElement("div");
     spark.innerText="🎆";
     spark.style.position="fixed";
     spark.style.left=Math.random()*100+"vw";
