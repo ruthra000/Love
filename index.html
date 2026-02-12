@@ -8,8 +8,8 @@
 <style>
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg,#ff416c,#ff4b2b);
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#ff416c,#ff4b2b);
     display:flex;
     justify-content:center;
     align-items:center;
@@ -20,20 +20,19 @@ body{
 }
 
 .container{
-    background: rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.15);
     padding:30px;
     border-radius:20px;
-    backdrop-filter: blur(10px);
+    backdrop-filter:blur(10px);
     width:90%;
     max-width:400px;
 }
 
-h1{
-    font-size:24px;
-}
-
-p{
-    font-size:18px;
+img{
+    width:90%;
+    max-width:300px;
+    border-radius:15px;
+    margin-bottom:15px;
 }
 
 button{
@@ -58,13 +57,13 @@ button{
 
 .heart{
     position:absolute;
+    animation:float 4s linear infinite;
     color:white;
-    animation: float 4s linear infinite;
 }
 
 @keyframes float{
-    from{transform:translateY(100vh); opacity:1;}
-    to{transform:translateY(-10vh); opacity:0;}
+    from{transform:translateY(100vh);opacity:1;}
+    to{transform:translateY(-10vh);opacity:0;}
 }
 </style>
 </head>
@@ -72,25 +71,20 @@ button{
 <body>
 
 <div class="container">
-    <h1 id="title"></h1>
-    <p id="message"></p>
+
+    <!-- SLIDESHOW IMAGE -->
+    <img id="slideshow" src="IMG-20251210-WA0006.jpg">
+
+    <h1>For My Love ❤️</h1>
+    <p>You mean the world to me ❤️ - Your Boy</p>
     <h2>Will you be mine forever? 💍</h2>
+
     <button class="yes" onclick="sayYes()">YES 💖</button>
     <button class="no" id="noBtn" onmouseover="moveNo()">NO 😜</button>
+
 </div>
 
 <script>
-function getParam(key){
-    const url = new URLSearchParams(window.location.search);
-    return url.get(key) ? decodeURIComponent(url.get(key).replace(/\+/g," ")) : "";
-}
-
-const receiver = getParam("receiver") || "My Love";
-const sender = getParam("sender") || "Your Boy";
-const message = getParam("message") || "You mean the world to me ❤️";
-
-document.getElementById("title").innerText = "For " + receiver;
-document.getElementById("message").innerText = message + " - " + sender;
 
 function sayYes(){
     alert("Yayyy ❤️ I love youuuuu 😘");
@@ -103,8 +97,9 @@ function moveNo(){
     btn.style.left=Math.random()*80+"%";
 }
 
+/* Floating hearts */
 setInterval(()=>{
-    const heart = document.createElement("div");
+    const heart=document.createElement("div");
     heart.className="heart";
     heart.innerText="💖";
     heart.style.left=Math.random()*100+"vw";
@@ -112,7 +107,22 @@ setInterval(()=>{
     document.body.appendChild(heart);
     setTimeout(()=>heart.remove(),4000);
 },500);
+
+/* Slideshow */
+const images=[
+"IMG-20251210-WA0006.jpg",
+"IMG-20260108-WA0003.jpg",
+"IMG-20260108-WA0012.jpg"
+];
+
+let i=0;
+
+setInterval(()=>{
+    i=(i+1)%images.length;
+    document.getElementById("slideshow").src=images[i];
+},2000);
+
 </script>
 
 </body>
-  </html>
+</html>
