@@ -1,30 +1,151 @@
 <!DOCTYPE html>
 <html>
-<body style="background:#ff416c;color:white;text-align:center;padding-top:100px;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
 
-<h2>Enter Password ❤️</h2>
-<input type="password" id="p">
-<button onclick="check()">Unlock</button>
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ff416c,#ff4b2b);
+  text-align:center;
+  color:white;
+}
 
-<div id="main" style="display:none;">
-  <h2>Will you be mine forever? 💍</h2>
-  <button onclick="alert('I LOVE YOU ❤️')">YES 💖</button>
+.hidden{display:none;}
+
+.container{
+  margin-top:80px;
+}
+
+input{
+  padding:10px;
+  border-radius:10px;
+  border:none;
+}
+
+button{
+  padding:10px 20px;
+  margin:10px;
+  border:none;
+  border-radius:20px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.yes{background:#00ff88;color:black;}
+.no{background:#ff0033;color:white;}
+
+img{
+  width:80%;
+  max-width:300px;
+  border-radius:20px;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);opacity:1;}
+  to{transform:translateY(-10vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 PASSWORD PAGE -->
+<div id="lockPage" class="container">
+  <h2>🔐 Enter Our Secret Password</h2>
+  <input type="password" id="passInput" placeholder="Enter password">
+  <br>
+  <button onclick="checkPass()">Unlock ❤️</button>
 </div>
 
-<audio id="music" loop>
-  <source src="Neelothi.mp3" type="audio/mpeg">
-</audio>
+<!-- ❤️ MAIN LOVE PAGE -->
+<div id="mainPage" class="container hidden">
+
+  <img id="slideshow" src="IMG-20251210-WA0006.jpg">
+
+  <h1>For My Love ❤️</h1>
+  <p>You mean the world to me ❤️ - Your Boy</p>
+  <h2>Will you be mine forever? 💍</h2>
+
+  <button class="yes" onclick="sayYes()">YES 💖</button>
+  <button class="no" id="noBtn" onmouseover="moveNo()">NO 😜</button>
+
+  <p id="countdown"></p>
+
+  <!-- 🎵 SONG -->
+  <audio id="bgMusic" loop>
+    <source src="Neelothi.mp3" type="audio/mpeg">
+  </audio>
+
+</div>
 
 <script>
-function check(){
-  if(document.getElementById("p").value==="yes"){
-    document.getElementById("main").style.display="block";
-    document.getElementById("music").play();
-  } else {
-    alert("Wrong password 😜");
+
+/* PASSWORD */
+function checkPass(){
+  const pass=document.getElementById("passInput").value;
+  if(pass==="yes"){
+    document.getElementById("lockPage").classList.add("hidden");
+    document.getElementById("mainPage").classList.remove("hidden");
+
+    document.getElementById("bgMusic").play();
+  }else{
+    alert("Wrong password da 😜");
   }
 }
+
+/* YES BUTTON */
+function sayYes(){
+  alert("Yayyy ❤️ I love youuu 😘");
+}
+
+/* NO BUTTON MOVE */
+function moveNo(){
+  const btn=document.getElementById("noBtn");
+  btn.style.position="absolute";
+  btn.style.top=Math.random()*80+"%";
+  btn.style.left=Math.random()*80+"%";
+}
+
+/* FLOATING HEARTS */
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.innerText="💖";
+  heart.style.position="fixed";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(Math.random()*20+10)+"px";
+  heart.style.animation="float 4s linear";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),4000);
+},500);
+
+/* SLIDESHOW */
+const images=[
+"IMG-20251210-WA0006.jpg",
+"IMG-20260108-WA0003.jpg",
+"IMG-20260108-WA0012.jpg"
+];
+
+let i=0;
+setInterval(()=>{
+  i=(i+1)%images.length;
+  document.getElementById("slideshow").src=images[i];
+},2000);
+
+/* COUNTDOWN */
+const targetDate=new Date("Feb 14, 2026 00:00:00").getTime();
+setInterval(()=>{
+  const now=new Date().getTime();
+  const distance=targetDate-now;
+  const days=Math.floor(distance/(1000*60*60*24));
+  document.getElementById("countdown").innerText=
+  "❤️ Our Special Day in: "+days+" days ❤️";
+},1000);
+
 </script>
 
 </body>
-</html>
+  </html>
