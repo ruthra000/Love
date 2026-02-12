@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -66,11 +66,8 @@ button{
 
 <div class="container">
     <img id="slideshow" src="IMG-20251210-WA0006.jpg">
-
-    <p style="font-size:14px; margin:10px;">🎵 Tap anywhere to play “Neelothi” ❤️</p>
-
-    <h1 id="title">For My Love ❤️</h1>
-    <p id="message">You mean the world to me ❤️ - Your Boy</p>
+    <h1>For My Love ❤️</h1>
+    <p>You mean the world to me ❤️ - Your Boy</p>
     <h2>Will you be mine forever? 💍</h2>
 
     <button class="yes" onclick="sayYes()">YES 💖</button>
@@ -79,25 +76,32 @@ button{
     <p id="countdown"></p>
 </div>
 
-<!-- Invisible YouTube Audio Only -->
-<iframe
-    id="ytAudio"
-    width="0"
-    height="0"
-    src="https://www.youtube.com/embed/nMUmySghIL0?autoplay=0&controls=0&loop=1&playlist=nMUmySghIL0"
-    allow="autoplay"
-    frameborder="0">
-</iframe>
+<!-- 🎵 Background Song (Upload Neelothi.mp3 in repo) -->
+<audio id="bgSong" autoplay loop>
+  <source src="Neelothi.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-document.body.addEventListener("click", function playSong(){
-    document.getElementById("ytAudio").src += "&autoplay=1";
-    document.body.removeEventListener("click", playSong);
+
+/* Enable autoplay after first tap (mobile fix) */
+document.addEventListener("click", function(){
+  document.getElementById("bgSong").play();
 });
 
 /* YES BUTTON */
 function sayYes(){
   alert("Yayyy ❤️ I love youuuuu 😘");
+
+  const loveText = document.createElement("h1");
+  loveText.innerText = "I LOVE YOU ❤️";
+  loveText.style.position = "fixed";
+  loveText.style.top = "40%";
+  loveText.style.left = "50%";
+  loveText.style.transform = "translate(-50%, -50%)";
+  loveText.style.fontSize = "40px";
+  loveText.style.zIndex = "9999";
+  document.body.appendChild(loveText);
+
   for(let i=0;i<30;i++){
     const spark = document.createElement("div");
     spark.innerText="🎆";
@@ -110,7 +114,7 @@ function sayYes(){
   }
 }
 
-/* NO BUTTON */
+/* NO BUTTON RUN AWAY */
 function moveNo(){
   const btn=document.getElementById("noBtn");
   btn.style.position="absolute";
@@ -136,6 +140,7 @@ const images=[
   "IMG-20260108-WA0003.jpg",
   "IMG-20260108-WA0012.jpg"
 ];
+
 let i=0;
 setInterval(()=>{
   i=(i+1)%images.length;
@@ -150,7 +155,8 @@ setInterval(()=>{
   const days=Math.floor(distance/(1000*60*60*24));
   document.getElementById("countdown").innerText="❤️ Our Special Day in: "+days+" days ❤️";
 },1000);
+
 </script>
 
 </body>
-    </html>
+</html>
