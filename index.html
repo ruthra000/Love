@@ -64,16 +64,35 @@ img{
   to{transform:scale(1.1);}
 }
 
+/* FINAL SCREEN FULL BACKGROUND */
+#final{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-image:url("IMG-20260108-WA0012.jpg"); /* 🔥 your couple pic */
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:20;
+}
+
 .bigLove{
   font-size:35px;
   animation:zoom 1.5s infinite alternate;
+  color:white;
+  text-shadow:2px 2px 15px black;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🔐 PASSWORD -->
+<!-- PASSWORD -->
 <div class="container" id="lock">
   <h2>🔐 Enter Secret Password</h2>
   <input type="password" id="pass" placeholder="Enter password">
@@ -81,13 +100,13 @@ img{
   <button onclick="checkPass()">Unlock ❤️</button>
 </div>
 
-<!-- 💌 LOVE LETTER -->
+<!-- LOVE LETTER -->
 <div class="container hidden" id="letter">
   <h2 id="typing"></h2>
   <button onclick="goProposal()">Continue 💖</button>
 </div>
 
-<!-- 💍 PROPOSAL -->
+<!-- PROPOSAL -->
 <div class="container hidden" id="proposal">
   <img id="slide" src="IMG-20251210-WA0006.jpg">
   <h2>Will you be mine forever? 💍</h2>
@@ -95,8 +114,8 @@ img{
   <button class="no" id="noBtn" onmouseover="moveNo()">NO 😜</button>
 </div>
 
-<!-- 💖 FINAL SCREEN -->
-<div class="container hidden" id="final">
+<!-- FINAL SCREEN -->
+<div class="hidden" id="final">
   <h1 class="bigLove">I LOVE YOU SO MUCH ❤️</h1>
 </div>
 
@@ -154,7 +173,7 @@ function moveNo(){
   btn.style.left=Math.random()*80+"%";
 }
 
-/* FINAL LOVE */
+/* FINAL SCREEN */
 function finalLove(){
   document.getElementById("proposal").classList.add("hidden");
   document.getElementById("final").classList.remove("hidden");
