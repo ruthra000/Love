@@ -55,6 +55,12 @@ button{
     position:relative;
 }
 
+.playbtn{
+    background:#ffffff;
+    color:#ff416c;
+    font-weight:bold;
+}
+
 @keyframes float{
     from{transform:translateY(100vh);opacity:1;}
     to{transform:translateY(-10vh);opacity:0;}
@@ -64,22 +70,10 @@ button{
 
 <body>
 
-<!-- PASSWORD SCREEN -->
-<div id="lockScreen" style="position:fixed;top:0;left:0;width:100%;height:100%;
-background:linear-gradient(135deg,#ff416c,#ff4b2b);
-display:flex;justify-content:center;align-items:center;flex-direction:column;color:white;z-index:9999;">
+<div class="container">
 
-<h2>🔐 Enter Our Secret Password</h2>
-<input type="password" id="passwordInput" placeholder="Enter password"
-style="padding:10px;border-radius:10px;border:none;margin:10px;">
-<button onclick="checkPassword()" style="padding:10px 20px;border:none;border-radius:10px;">Unlock ❤️</button>
-<p id="error" style="color:yellow;"></p>
-
-</div>
-
-<!-- MAIN CONTENT -->
-<div class="container" id="mainContent" style="display:none;">
     <img id="slideshow" src="IMG-20251210-WA0006.jpg">
+
     <h1>For My Love ❤️</h1>
     <p>You mean the world to me ❤️ - Your Boy</p>
     <h2>Will you be mine forever? 💍</h2>
@@ -87,44 +81,40 @@ style="padding:10px;border-radius:10px;border:none;margin:10px;">
     <button class="yes" onclick="sayYes()">YES 💖</button>
     <button class="no" id="noBtn" onmouseover="moveNo()">NO 😜</button>
 
-    <p id="countdown"></p>
+    <br>
+    <button class="playbtn" onclick="playMusic()">🎵 Play Our Song</button>
+
 </div>
 
-<!-- LOCAL SONG -->
-<audio autoplay loop>
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
   <source src="Neelothi.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-/* PASSWORD CHECK */
-function checkPassword(){
-  const pass = document.getElementById("passwordInput").value;
-
-  if(pass === "arruvey"){   // Change password here if needed
-    document.getElementById("lockScreen").style.display="none";
-    document.getElementById("mainContent").style.display="block";
-  }else{
-    document.getElementById("error").innerText="Wrong password 😜";
-  }
+/* PLAY MUSIC */
+function playMusic(){
+  const music = document.getElementById("bgMusic");
+  music.play();
 }
 
 /* YES BUTTON */
 function sayYes(){
   alert("Yayyy ❤️ I love youuuuu 😘");
 
-  const loveText=document.createElement("h1");
-  loveText.innerText="I LOVE YOU ❤️";
-  loveText.style.position="fixed";
-  loveText.style.top="40%";
-  loveText.style.left="50%";
-  loveText.style.transform="translate(-50%,-50%)";
-  loveText.style.fontSize="40px";
-  loveText.style.zIndex="9999";
+  const loveText = document.createElement("h1");
+  loveText.innerText = "I LOVE YOU ❤️";
+  loveText.style.position = "fixed";
+  loveText.style.top = "40%";
+  loveText.style.left = "50%";
+  loveText.style.transform = "translate(-50%, -50%)";
+  loveText.style.fontSize = "40px";
+  loveText.style.zIndex = "9999";
   document.body.appendChild(loveText);
 
   for(let i=0;i<30;i++){
-    const spark=document.createElement("div");
+    const spark = document.createElement("div");
     spark.innerText="🎆";
     spark.style.position="fixed";
     spark.style.left=Math.random()*100+"vw";
@@ -167,15 +157,6 @@ setInterval(()=>{
   i=(i+1)%images.length;
   document.getElementById("slideshow").src=images[i];
 },2000);
-
-/* COUNTDOWN */
-const targetDate=new Date("Feb 14, 2026 00:00:00").getTime();
-setInterval(()=>{
-  const now=new Date().getTime();
-  const distance=targetDate-now;
-  const days=Math.floor(distance/(1000*60*60*24));
-  document.getElementById("countdown").innerText="❤️ Our Special Day in: "+days+" days ❤️";
-},1000);
 
 </script>
 
