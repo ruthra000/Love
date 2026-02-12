@@ -28,10 +28,12 @@ body{
     max-width:380px;
 }
 
-img{
-    width:100%;
-    border-radius:20px;
-    margin-bottom:15px;
+input{
+    padding:10px;
+    border:none;
+    border-radius:15px;
+    width:80%;
+    margin:10px 0;
 }
 
 button{
@@ -43,16 +45,7 @@ button{
     cursor:pointer;
 }
 
-.yes{
-    background:#00ff88;
-    color:black;
-}
-
-.no{
-    background:#ff0033;
-    color:white;
-    position:relative;
-}
+.hidden{display:none;}
 
 @keyframes float{
     from{transform:translateY(100vh);opacity:1;}
@@ -63,81 +56,95 @@ button{
 
 <body>
 
-<div class="container">
-
-    <img id="slideshow" src="IMG-20251210-WA0006.jpg">
-
-    <h1>For My Love ❤️</h1>
-    <p>You mean the world to me ❤️ - Your Boy</p>
-    <h2>Will you be mine forever? 💍</h2>
-
-    <button class="yes" onclick="sayYes()">YES 💖</button>
-    <button class="no" id="noBtn" onmouseover="moveNo()">NO 😜</button>
-
-    <p id="countdown"></p>
-
+<!-- 🔒 PASSWORD SCREEN -->
+<div class="container" id="lockScreen">
+    <h2>Enter Secret Name ❤️</h2>
+    <input type="text" id="secretInput" placeholder="Type her name...">
+    <br>
+    <button onclick="checkPassword()">Unlock 💖</button>
 </div>
 
-<!-- 🎵 NEELothi Song -->
+<!-- 💌 LOVE LETTER SCREEN -->
+<div class="container hidden" id="letterScreen">
+    <h2>My Dearest Love 💌</h2>
+    <p>
+        From the day you entered my life,
+        everything became colorful and beautiful.
+        You are my happiness, my peace, my everything ❤️
+    </p>
+    <button onclick="showProposal()">Continue 💖</button>
+</div>
+
+<!-- 💍 PROPOSAL SCREEN -->
+<div class="container hidden" id="proposalScreen">
+    <img id="slideshow" src="IMG-20251210-WA0006.jpg">
+    <h1>Pavithra ❤️ Rohith</h1>
+    <h2>Will you be mine forever? 💍</h2>
+    <button onclick="sayYes()">YES 💖</button>
+    <button id="noBtn" onmouseover="moveNo()">NO 😜</button>
+</div>
+
+<!-- 🎵 SONG -->
 <audio id="bgMusic" loop>
-    <source src="Neelothi.mp3" type="audio/mpeg">
+  <source src="Neelothi.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-/* 🎵 PLAY SONG ON FIRST TOUCH */
-window.addEventListener("click", function(){
-    const music=document.getElementById("bgMusic");
-    music.play();
-}, { once:true });
+/* 🔒 PASSWORD CHECK */
+function checkPassword(){
+    const input=document.getElementById("secretInput").value.toLowerCase();
+    if(input==="pavithra"){
+        document.getElementById("lockScreen").classList.add("hidden");
+        document.getElementById("letterScreen").classList.remove("hidden");
+        document.getElementById("bgMusic").play();
+    } else {
+        alert("Wrong name da 😜");
+    }
+}
 
-/* YES BUTTON */
+/* 💌 SHOW PROPOSAL */
+function showProposal(){
+    document.getElementById("letterScreen").classList.add("hidden");
+    document.getElementById("proposalScreen").classList.remove("hidden");
+}
+
+/* 💖 YES */
 function sayYes(){
-  alert("Yayyy ❤️ I love youuuuu 😘");
-
-  const love=document.createElement("h1");
-  love.innerText="I LOVE YOU ❤️";
-  love.style.position="fixed";
-  love.style.top="40%";
-  love.style.left="50%";
-  love.style.transform="translate(-50%,-50%)";
-  love.style.fontSize="40px";
-  love.style.zIndex="9999";
-  document.body.appendChild(love);
-
-  for(let i=0;i<25;i++){
-    const fire=document.createElement("div");
-    fire.innerText="🎆";
-    fire.style.position="fixed";
-    fire.style.left=Math.random()*100+"vw";
-    fire.style.top=Math.random()*100+"vh";
-    fire.style.fontSize="28px";
-    document.body.appendChild(fire);
-    setTimeout(()=>fire.remove(),2000);
-  }
+    alert("I LOVE YOU SO MUCH ❤️");
+    for(let i=0;i<25;i++){
+        const fire=document.createElement("div");
+        fire.innerText="💖";
+        fire.style.position="fixed";
+        fire.style.left=Math.random()*100+"vw";
+        fire.style.top=Math.random()*100+"vh";
+        fire.style.fontSize="30px";
+        document.body.appendChild(fire);
+        setTimeout(()=>fire.remove(),2000);
+    }
 }
 
-/* NO BUTTON RUN */
+/* 😜 NO RUN */
 function moveNo(){
-  const btn=document.getElementById("noBtn");
-  btn.style.position="absolute";
-  btn.style.top=Math.random()*80+"%";
-  btn.style.left=Math.random()*80+"%";
+    const btn=document.getElementById("noBtn");
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*80+"%";
+    btn.style.left=Math.random()*80+"%";
 }
 
-/* FLOATING HEARTS */
+/* ❤️ NAME RAIN */
 setInterval(()=>{
-  const heart=document.createElement("div");
-  heart.innerText="💖";
-  heart.style.position="fixed";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=(Math.random()*20+10)+"px";
-  heart.style.animation="float 4s linear";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),4000);
-},500);
+    const rain=document.createElement("div");
+    rain.innerText="Pavithra ❤️ Rohith";
+    rain.style.position="fixed";
+    rain.style.left=Math.random()*100+"vw";
+    rain.style.fontSize="14px";
+    rain.style.animation="float 4s linear";
+    document.body.appendChild(rain);
+    setTimeout(()=>rain.remove(),4000);
+},700);
 
-/* SLIDESHOW */
+/* 📸 SLIDESHOW */
 const images=[
   "IMG-20251210-WA0006.jpg",
   "IMG-20260108-WA0003.jpg",
@@ -147,20 +154,11 @@ const images=[
 let i=0;
 setInterval(()=>{
   i=(i+1)%images.length;
-  document.getElementById("slideshow").src=images[i];
+  const img=document.getElementById("slideshow");
+  if(img) img.src=images[i];
 },2000);
-
-/* COUNTDOWN */
-const target=new Date("Feb 14, 2026 00:00:00").getTime();
-setInterval(()=>{
-  const now=new Date().getTime();
-  const diff=target-now;
-  const days=Math.floor(diff/(1000*60*60*24));
-  document.getElementById("countdown").innerText=
-  "❤️ Our Special Day in: "+days+" days ❤️";
-},1000);
 
 </script>
 
 </body>
- </html>
+    </html>
