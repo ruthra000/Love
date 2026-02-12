@@ -19,7 +19,6 @@ body{
   color:white;
 }
 
-/* Glass card */
 .container{
   background:rgba(255,255,255,0.15);
   padding:25px;
@@ -27,6 +26,8 @@ body{
   backdrop-filter:blur(10px);
   width:90%;
   max-width:420px;
+  position:relative;
+  z-index:10;
 }
 
 .hidden{display:none;}
@@ -67,13 +68,15 @@ img{width:100%;border-radius:15px;margin-bottom:15px;}
   background:white;
   border-radius:50%;
   animation:twinkle 2s infinite;
+  z-index:0;
+  pointer-events:none;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🔐 PASSWORD -->
+<!-- PASSWORD -->
 <div class="container" id="lock">
   <h2>🔐 Enter Secret Password</h2>
   <input type="password" id="pass" placeholder="Enter password">
@@ -81,13 +84,13 @@ img{width:100%;border-radius:15px;margin-bottom:15px;}
   <button onclick="checkPass()">Unlock ❤️</button>
 </div>
 
-<!-- 💌 STORY -->
+<!-- STORY -->
 <div class="container hidden" id="story">
   <h3 id="typing"></h3>
   <button onclick="goProposal()">Continue 💖</button>
 </div>
 
-<!-- 💍 PROPOSAL -->
+<!-- PROPOSAL -->
 <div class="container hidden" id="proposal">
   <img id="slide" src="IMG-20251210-WA0006.jpg">
   <h2>Will you be mine forever? 💍</h2>
@@ -96,7 +99,7 @@ img{width:100%;border-radius:15px;margin-bottom:15px;}
   <button class="no" id="noBtn" onmouseover="moveNo()">NO 😜</button>
 </div>
 
-<!-- 💖 FINAL -->
+<!-- FINAL -->
 <div class="container hidden" id="final">
   <h1 class="bigLove">I LOVE YOU FOREVER ❤️</h1>
 </div>
@@ -107,7 +110,7 @@ img{width:100%;border-radius:15px;margin-bottom:15px;}
 
 <script>
 
-/* ===== PASSWORD ===== */
+/* PASSWORD */
 function checkPass(){
   if(document.getElementById("pass").value === "yes"){
     document.getElementById("lock").classList.add("hidden");
@@ -119,7 +122,7 @@ function checkPass(){
   }
 }
 
-/* ===== TYPING STORY ===== */
+/* TYPING */
 const text = "The day I saw you, my world changed forever ❤️ You are my happiness, my peace, my everything.";
 let i=0;
 function typeLetter(){
@@ -135,7 +138,7 @@ function goProposal(){
   document.getElementById("proposal").classList.remove("hidden");
 }
 
-/* ===== SLIDESHOW ===== */
+/* SLIDESHOW */
 const images=[
   "IMG-20251210-WA0006.jpg",
   "IMG-20260108-WA0003.jpg",
@@ -149,15 +152,15 @@ setInterval(()=>{
   }
 },2000);
 
-/* ===== LOVE DAYS COUNTER ===== */
-const startDate = new Date("Jan 1, 2025"); // 🔥 change this
+/* LOVE DAYS COUNTER */
+const startDate = new Date("Jan 1, 2025");
 const today = new Date();
 const diffTime = today - startDate;
 const diffDays = Math.floor(diffTime / (1000*60*60*24));
 document.getElementById("daysCounter").innerText =
   "We have loved each other for " + diffDays + " days ❤️";
 
-/* ===== NO BUTTON RUN ===== */
+/* NO BUTTON RUN */
 function moveNo(){
   const btn=document.getElementById("noBtn");
   btn.style.position="absolute";
@@ -165,7 +168,7 @@ function moveNo(){
   btn.style.left=Math.random()*80+"%";
 }
 
-/* ===== FINAL LOVE ===== */
+/* FINAL */
 function finalLove(){
   document.getElementById("proposal").classList.add("hidden");
   document.getElementById("final").classList.remove("hidden");
@@ -182,7 +185,7 @@ function finalLove(){
   }
 }
 
-/* ===== STAR BACKGROUND ===== */
+/* STARS */
 for(let i=0;i<70;i++){
   const star=document.createElement("div");
   star.classList.add("star");
@@ -193,7 +196,7 @@ for(let i=0;i<70;i++){
   document.body.appendChild(star);
 }
 
-/* ===== MOUSE SPARKLE ===== */
+/* SPARKLE */
 document.addEventListener("mousemove", function(e){
   const sparkle=document.createElement("div");
   sparkle.innerText="✨";
@@ -201,6 +204,7 @@ document.addEventListener("mousemove", function(e){
   sparkle.style.left=e.clientX+"px";
   sparkle.style.top=e.clientY+"px";
   sparkle.style.fontSize="15px";
+  sparkle.style.pointerEvents="none";
   document.body.appendChild(sparkle);
   setTimeout(()=>sparkle.remove(),500);
 });
