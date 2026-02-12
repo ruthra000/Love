@@ -8,8 +8,8 @@
 <style>
 body{
     margin:0;
-    font-family:'Segoe UI',sans-serif;
-    background:linear-gradient(135deg,#ff416c,#ff4b2b);
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ff416c,#ff4b2b);
     display:flex;
     justify-content:center;
     align-items:center;
@@ -20,20 +20,19 @@ body{
 }
 
 .container{
-    background:rgba(255,255,255,0.15);
-    padding:25px;
+    background: rgba(255,255,255,0.15);
+    padding:30px;
     border-radius:20px;
-    backdrop-filter:blur(10px);
+    backdrop-filter: blur(10px);
     width:90%;
-    max-width:380px;
+    max-width:400px;
 }
 
-input{
-    padding:10px;
-    border:none;
-    border-radius:15px;
-    width:80%;
-    margin:10px 0;
+img{
+    width:90%;
+    max-width:300px;
+    border-radius:20px;
+    margin-bottom:15px;
 }
 
 button{
@@ -45,7 +44,16 @@ button{
     cursor:pointer;
 }
 
-.hidden{display:none;}
+.yes{
+    background:#00ff88;
+    color:black;
+}
+
+.no{
+    background:#ff0033;
+    color:white;
+    position:relative;
+}
 
 @keyframes float{
     from{transform:translateY(100vh);opacity:1;}
@@ -56,95 +64,98 @@ button{
 
 <body>
 
-<!-- 🔒 PASSWORD SCREEN -->
-<div class="container" id="lockScreen">
-    <h2>Enter Secret Name ❤️</h2>
-    <input type="text" id="secretInput" placeholder="Type her name...">
-    <br>
-    <button onclick="checkPassword()">Unlock 💖</button>
+<!-- PASSWORD SCREEN -->
+<div id="lockScreen" style="position:fixed;top:0;left:0;width:100%;height:100%;
+background:linear-gradient(135deg,#ff416c,#ff4b2b);
+display:flex;justify-content:center;align-items:center;flex-direction:column;color:white;z-index:9999;">
+
+<h2>🔐 Enter Our Secret Password</h2>
+<input type="password" id="passwordInput" placeholder="Enter password"
+style="padding:10px;border-radius:10px;border:none;margin:10px;">
+<button onclick="checkPassword()" style="padding:10px 20px;border:none;border-radius:10px;">Unlock ❤️</button>
+<p id="error" style="color:yellow;"></p>
+
 </div>
 
-<!-- 💌 LOVE LETTER SCREEN -->
-<div class="container hidden" id="letterScreen">
-    <h2>My Dearest Love 💌</h2>
-    <p>
-        From the day you entered my life,
-        everything became colorful and beautiful.
-        You are my happiness, my peace, my everything ❤️
-    </p>
-    <button onclick="showProposal()">Continue 💖</button>
-</div>
-
-<!-- 💍 PROPOSAL SCREEN -->
-<div class="container hidden" id="proposalScreen">
+<!-- MAIN CONTENT -->
+<div class="container" id="mainContent" style="display:none;">
     <img id="slideshow" src="IMG-20251210-WA0006.jpg">
-    <h1>Pavithra ❤️ Rohith</h1>
+    <h1>For My Love ❤️</h1>
+    <p>You mean the world to me ❤️ - Your Boy</p>
     <h2>Will you be mine forever? 💍</h2>
-    <button onclick="sayYes()">YES 💖</button>
-    <button id="noBtn" onmouseover="moveNo()">NO 😜</button>
+
+    <button class="yes" onclick="sayYes()">YES 💖</button>
+    <button class="no" id="noBtn" onmouseover="moveNo()">NO 😜</button>
+
+    <p id="countdown"></p>
 </div>
 
-<!-- 🎵 SONG -->
-<audio id="bgMusic" loop>
+<!-- LOCAL SONG -->
+<audio autoplay loop>
   <source src="Neelothi.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-/* 🔒 PASSWORD CHECK */
+/* PASSWORD CHECK */
 function checkPassword(){
-    const input=document.getElementById("secretInput").value.toLowerCase();
-    if(input==="pavithra"){
-        document.getElementById("lockScreen").classList.add("hidden");
-        document.getElementById("letterScreen").classList.remove("hidden");
-        document.getElementById("bgMusic").play();
-    } else {
-        alert("Wrong name da 😜");
-    }
+  const pass = document.getElementById("passwordInput").value;
+
+  if(pass === "arruvey"){   // Change password here if needed
+    document.getElementById("lockScreen").style.display="none";
+    document.getElementById("mainContent").style.display="block";
+  }else{
+    document.getElementById("error").innerText="Wrong password 😜";
+  }
 }
 
-/* 💌 SHOW PROPOSAL */
-function showProposal(){
-    document.getElementById("letterScreen").classList.add("hidden");
-    document.getElementById("proposalScreen").classList.remove("hidden");
-}
-
-/* 💖 YES */
+/* YES BUTTON */
 function sayYes(){
-    alert("I LOVE YOU SO MUCH ❤️");
-    for(let i=0;i<25;i++){
-        const fire=document.createElement("div");
-        fire.innerText="💖";
-        fire.style.position="fixed";
-        fire.style.left=Math.random()*100+"vw";
-        fire.style.top=Math.random()*100+"vh";
-        fire.style.fontSize="30px";
-        document.body.appendChild(fire);
-        setTimeout(()=>fire.remove(),2000);
-    }
+  alert("Yayyy ❤️ I love youuuuu 😘");
+
+  const loveText=document.createElement("h1");
+  loveText.innerText="I LOVE YOU ❤️";
+  loveText.style.position="fixed";
+  loveText.style.top="40%";
+  loveText.style.left="50%";
+  loveText.style.transform="translate(-50%,-50%)";
+  loveText.style.fontSize="40px";
+  loveText.style.zIndex="9999";
+  document.body.appendChild(loveText);
+
+  for(let i=0;i<30;i++){
+    const spark=document.createElement("div");
+    spark.innerText="🎆";
+    spark.style.position="fixed";
+    spark.style.left=Math.random()*100+"vw";
+    spark.style.top=Math.random()*100+"vh";
+    spark.style.fontSize="30px";
+    document.body.appendChild(spark);
+    setTimeout(()=>spark.remove(),2000);
+  }
 }
 
-/* 😜 NO RUN */
+/* NO BUTTON RUN */
 function moveNo(){
-    const btn=document.getElementById("noBtn");
-    btn.style.position="absolute";
-    btn.style.top=Math.random()*80+"%";
-    btn.style.left=Math.random()*80+"%";
+  const btn=document.getElementById("noBtn");
+  btn.style.position="absolute";
+  btn.style.top=Math.random()*80+"%";
+  btn.style.left=Math.random()*80+"%";
 }
 
-/* ❤️ NAME RAIN */
+/* FLOATING HEARTS */
 setInterval(()=>{
-    const rain=document.createElement("div");
-    rain.innerText="Pavithra ❤️ Rohith";
-    rain.style.position="fixed";
-    rain.style.left=Math.random()*100+"vw";
-    rain.style.fontSize="14px";
-    rain.style.animation="float 4s linear";
-    document.body.appendChild(rain);
-    setTimeout(()=>rain.remove(),4000);
-},700);
+  const heart=document.createElement("div");
+  heart.innerText="💖";
+  heart.style.position="fixed";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(Math.random()*20+10)+"px";
+  heart.style.animation="float 4s linear";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),4000);
+},500);
 
-/* 📸 SLIDESHOW */
+/* SLIDESHOW */
 const images=[
   "IMG-20251210-WA0006.jpg",
   "IMG-20260108-WA0003.jpg",
@@ -154,9 +165,17 @@ const images=[
 let i=0;
 setInterval(()=>{
   i=(i+1)%images.length;
-  const img=document.getElementById("slideshow");
-  if(img) img.src=images[i];
+  document.getElementById("slideshow").src=images[i];
 },2000);
+
+/* COUNTDOWN */
+const targetDate=new Date("Feb 14, 2026 00:00:00").getTime();
+setInterval(()=>{
+  const now=new Date().getTime();
+  const distance=targetDate-now;
+  const days=Math.floor(distance/(1000*60*60*24));
+  document.getElementById("countdown").innerText="❤️ Our Special Day in: "+days+" days ❤️";
+},1000);
 
 </script>
 
