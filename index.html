@@ -14,12 +14,12 @@ body{
   justify-content:center;
   align-items:center;
   height:100vh;
-  overflow:hidden;
   text-align:center;
   color:white;
+  overflow:hidden;
 }
 
-/* MAIN CARD */
+/* Main Card */
 .container{
   background:rgba(255,255,255,0.2);
   padding:25px;
@@ -27,17 +27,18 @@ body{
   width:90%;
   max-width:400px;
   position:relative;
-  z-index:100;
+  z-index:10;   /* Always above background */
 }
 
 .hidden{display:none;}
 
 input{
-  padding:10px;
+  padding:12px;
   border:none;
   border-radius:10px;
   width:80%;
-  margin:10px 0;
+  font-size:16px;
+  margin-top:10px;
 }
 
 button{
@@ -46,6 +47,7 @@ button{
   border:none;
   border-radius:20px;
   cursor:pointer;
+  font-size:16px;
 }
 
 .yes{background:#00ff88;color:black;}
@@ -57,27 +59,22 @@ img{
   margin-bottom:15px;
 }
 
-/* STARS BACKGROUND */
+/* Stars */
 .star{
   position:fixed;
   width:3px;
   height:3px;
   background:white;
   border-radius:50%;
-  pointer-events:none;
+  pointer-events:none; /* VERY IMPORTANT */
   z-index:0;
   animation:twinkle 2s infinite;
 }
 
 @keyframes twinkle{
-  0%{opacity:0.2;}
+  0%{opacity:0.3;}
   50%{opacity:1;}
-  100%{opacity:0.2;}
-}
-
-@keyframes float{
-  from{transform:translateY(100vh);opacity:1;}
-  to{transform:translateY(-10vh);opacity:0;}
+  100%{opacity:0.3;}
 }
 </style>
 </head>
@@ -106,7 +103,7 @@ img{
 
 <script>
 
-/* PASSWORD */
+/* PASSWORD CHECK */
 function checkPass(){
   if(document.getElementById("pass").value === "yes"){
     document.getElementById("lock").classList.add("hidden");
@@ -139,13 +136,13 @@ function moveNo(){
   btn.style.left=Math.random()*80+"%";
 }
 
-/* FINAL LOVE */
+/* FINAL */
 function finalLove(){
   alert("I LOVE YOU FOREVER ❤️");
 }
 
 /* CREATE STARS */
-for(let s=0;s<60;s++){
+for(let s=0;s<50;s++){
   const star=document.createElement("div");
   star.classList.add("star");
   star.style.top=Math.random()*100+"vh";
