@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ff416c,#ff4b2b);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+    text-align:center;
+    color:white;
+}
+
+.container{
+    background: rgba(255,255,255,0.15);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter: blur(10px);
+    width:90%;
+    max-width:400px;
+}
+
+h1{
+    font-size:24px;
+}
+
+p{
+    font-size:18px;
+}
+
+button{
+    padding:10px 20px;
+    margin:10px;
+    border:none;
+    border-radius:20px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.yes{
+    background:#00ff88;
+    color:black;
+}
+
+.no{
+    background:#ff0033;
+    color:white;
+    position:relative;
+}
+
+.heart{
+    position:absolute;
+    color:white;
+    animation: float 4s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh); opacity:1;}
+    to{transform:translateY(-10vh); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1 id="title"></h1>
+    <p id="message"></p>
+    <h2>Will you be mine forever? 💍</h2>
+    <button class="yes" onclick="sayYes()">YES 💖</button>
+    <button class="no" id="noBtn" onmouseover="moveNo()">NO 😜</button>
+</div>
+
+<script>
+function getParam(key){
+    const url = new URLSearchParams(window.location.search);
+    return url.get(key) ? decodeURIComponent(url.get(key).replace(/\+/g," ")) : "";
+}
+
+const receiver = getParam("receiver") || "My Love";
+const sender = getParam("sender") || "Your Boy";
+const message = getParam("message") || "You mean the world to me ❤️";
+
+document.getElementById("title").innerText = "For " + receiver;
+document.getElementById("message").innerText = message + " - " + sender;
+
+function sayYes(){
+    alert("Yayyy ❤️ I love youuuuu 😘");
+}
+
+function moveNo(){
+    const btn = document.getElementById("noBtn");
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*80+"%";
+    btn.style.left=Math.random()*80+"%";
+}
+
+setInterval(()=>{
+    const heart = document.createElement("div");
+    heart.className="heart";
+    heart.innerText="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+10)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),4000);
+},500);
+</script>
+
+</body>
+  </html>
