@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,9 @@ body{
   border-radius:20px;
   backdrop-filter:blur(10px);
   width:90%;
-  max-width:400px;
+  max-width:420px;
+  position:relative;
+  z-index:10;
 }
 
 .hidden{display:none;}
@@ -41,51 +44,33 @@ button{
 
 .yes{background:#00ff88;color:black;}
 .no{background:#ff0033;color:white;position:relative;}
+input{padding:10px;border:none;border-radius:10px;margin:10px 0;}
 
-input{
-  padding:10px;
-  border:none;
-  border-radius:10px;
-}
-
-img{
-  width:100%;
-  border-radius:15px;
-  margin-bottom:15px;
-}
+img{width:100%;border-radius:15px;margin-bottom:15px;}
 
 @keyframes float{
   from{transform:translateY(100vh);opacity:1;}
   to{transform:translateY(-10vh);opacity:0;}
 }
-
 @keyframes zoom{
   from{transform:scale(1);}
-  to{transform:scale(1.1);}
+  to{transform:scale(1.12);}
 }
+.bigLove{font-size:34px;animation:zoom 1.5s infinite alternate;}
 
-/* FINAL SCREEN FULL BACKGROUND */
-#final{
+/* Stars */
+@keyframes twinkle{
+  0%{opacity:0.2;}
+  50%{opacity:1;}
+  100%{opacity:0.2;}
+}
+.star{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background-image:url("IMG-20260108-WA0012.jpg"); /* 🔥 your couple pic */
-  background-size:cover;
-  background-position:center;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  z-index:20;
-}
-
-.bigLove{
-  font-size:35px;
-  animation:zoom 1.5s infinite alternate;
-  color:white;
-  text-shadow:2px 2px 15px black;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 2s infinite;
+  z-index:0;
+  pointer-events:none;
 }
 </style>
 </head>
@@ -100,9 +85,9 @@ img{
   <button onclick="checkPass()">Unlock ❤️</button>
 </div>
 
-<!-- LOVE LETTER -->
-<div class="container hidden" id="letter">
-  <h2 id="typing"></h2>
+<!-- STORY -->
+<div class="container hidden" id="story">
+  <h3 id="typing"></h3>
   <button onclick="goProposal()">Continue 💖</button>
 </div>
 
@@ -110,13 +95,14 @@ img{
 <div class="container hidden" id="proposal">
   <img id="slide" src="IMG-20251210-WA0006.jpg">
   <h2>Will you be mine forever? 💍</h2>
+  <p id="daysCounter"></p>
   <button class="yes" onclick="finalLove()">YES 💖</button>
   <button class="no" id="noBtn" onmouseover="moveNo()">NO 😜</button>
 </div>
 
-<!-- FINAL SCREEN -->
-<div class="hidden" id="final">
-  <h1 class="bigLove">I LOVE YOU SO MUCH ❤️</h1>
+<!-- FINAL -->
+<div class="container hidden" id="final">
+  <h1 class="bigLove">I LOVE YOU FOREVER ❤️</h1>
 </div>
 
 <audio id="music" loop>
@@ -129,7 +115,7 @@ img{
 function checkPass(){
   if(document.getElementById("pass").value === "yes"){
     document.getElementById("lock").classList.add("hidden");
-    document.getElementById("letter").classList.remove("hidden");
+    document.getElementById("story").classList.remove("hidden");
     document.getElementById("music").play();
     typeLetter();
   } else {
@@ -137,19 +123,19 @@ function checkPass(){
   }
 }
 
-/* TYPING LETTER */
-const text = "From the day you came into my life, everything became beautiful ❤️";
+/* TYPING */
+const text = "The day I saw you, my world changed forever ❤️ You are my happiness, my peace, my everything.";
 let i=0;
 function typeLetter(){
   if(i < text.length){
     document.getElementById("typing").innerHTML += text.charAt(i);
     i++;
-    setTimeout(typeLetter,50);
+    setTimeout(typeLetter,40);
   }
 }
 
 function goProposal(){
-  document.getElementById("letter").classList.add("hidden");
+  document.getElementById("story").classList.add("hidden");
   document.getElementById("proposal").classList.remove("hidden");
 }
 
@@ -161,9 +147,19 @@ const images=[
 ];
 let s=0;
 setInterval(()=>{
-  s=(s+1)%images.length;
-  document.getElementById("slide").src=images[s];
+  if(document.getElementById("slide")){
+    s=(s+1)%images.length;
+    document.getElementById("slide").src=images[s];
+  }
 },2000);
+
+/* LOVE DAYS COUNTER */
+const startDate = new Date("Jan 1, 2025");
+const today = new Date();
+const diffTime = today - startDate;
+const diffDays = Math.floor(diffTime / (1000*60*60*24));
+document.getElementById("daysCounter").innerText =
+  "We have loved each other for " + diffDays + " days ❤️";
 
 /* NO BUTTON RUN */
 function moveNo(){
@@ -173,22 +169,46 @@ function moveNo(){
   btn.style.left=Math.random()*80+"%";
 }
 
-/* FINAL SCREEN */
+/* FINAL */
 function finalLove(){
   document.getElementById("proposal").classList.add("hidden");
   document.getElementById("final").classList.remove("hidden");
 
-  for(let i=0;i<40;i++){
+  for(let i=0;i<50;i++){
     const heart=document.createElement("div");
     heart.innerText="💖";
     heart.style.position="fixed";
     heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(Math.random()*25+15)+"px";
+    heart.style.fontSize=(Math.random()*30+15)+"px";
     heart.style.animation="float 4s linear";
     document.body.appendChild(heart);
     setTimeout(()=>heart.remove(),4000);
   }
 }
+
+/* STARS */
+for(let i=0;i<70;i++){
+  const star=document.createElement("div");
+  star.classList.add("star");
+  star.style.width="3px";
+  star.style.height="3px";
+  star.style.top=Math.random()*100+"vh";
+  star.style.left=Math.random()*100+"vw";
+  document.body.appendChild(star);
+}
+
+/* SPARKLE */
+document.addEventListener("mousemove", function(e){
+  const sparkle=document.createElement("div");
+  sparkle.innerText="✨";
+  sparkle.style.position="fixed";
+  sparkle.style.left=e.clientX+"px";
+  sparkle.style.top=e.clientY+"px";
+  sparkle.style.fontSize="15px";
+  sparkle.style.pointerEvents="none";
+  document.body.appendChild(sparkle);
+  setTimeout(()=>sparkle.remove(),500);
+});
 
 </script>
 
