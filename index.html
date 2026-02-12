@@ -1,155 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Love ❤️</title>
+<body style="background:#ff416c;color:white;text-align:center;padding-top:100px;">
 
-<style>
-body{
-  margin:0;
-  font-family:Segoe UI,sans-serif;
-  background:linear-gradient(135deg,#ff416c,#ff4b2b);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  text-align:center;
-  color:white;
-  overflow:hidden;
-}
-
-/* Main Card */
-.container{
-  background:rgba(255,255,255,0.2);
-  padding:25px;
-  border-radius:20px;
-  width:90%;
-  max-width:400px;
-  position:relative;
-  z-index:10;   /* Always above background */
-}
-
-.hidden{display:none;}
-
-input{
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  width:80%;
-  font-size:16px;
-  margin-top:10px;
-}
-
-button{
-  padding:10px 20px;
-  margin:10px;
-  border:none;
-  border-radius:20px;
-  cursor:pointer;
-  font-size:16px;
-}
-
-.yes{background:#00ff88;color:black;}
-.no{background:#ff0033;color:white;position:relative;}
-
-img{
-  width:100%;
-  border-radius:15px;
-  margin-bottom:15px;
-}
-
-/* Stars */
-.star{
-  position:fixed;
-  width:3px;
-  height:3px;
-  background:white;
-  border-radius:50%;
-  pointer-events:none; /* VERY IMPORTANT */
-  z-index:0;
-  animation:twinkle 2s infinite;
-}
-
-@keyframes twinkle{
-  0%{opacity:0.3;}
-  50%{opacity:1;}
-  100%{opacity:0.3;}
-}
-</style>
-</head>
-
-<body>
-
-<!-- PASSWORD SCREEN -->
-<div class="container" id="lock">
-  <h2>Enter Password ❤️</h2>
-  <input type="password" id="pass" placeholder="Type password">
-  <br>
-  <button onclick="checkPass()">Unlock</button>
-</div>
-
-<!-- MAIN SCREEN -->
-<div class="container hidden" id="main">
-  <img id="slide" src="IMG-20251210-WA0006.jpg">
-  <h2>Will you be mine forever? 💍</h2>
-  <button class="yes" onclick="finalLove()">YES 💖</button>
-  <button class="no" id="noBtn" onmouseover="moveNo()">NO 😜</button>
-</div>
-
-<audio id="music" loop>
-  <source src="Neelothi.mp3" type="audio/mpeg">
-</audio>
+<h2>Password Test</h2>
+<input type="password" id="p">
+<button onclick="check()">Check</button>
 
 <script>
-
-/* PASSWORD CHECK */
-function checkPass(){
-  if(document.getElementById("pass").value === "yes"){
-    document.getElementById("lock").classList.add("hidden");
-    document.getElementById("main").classList.remove("hidden");
-    document.getElementById("music").play();
+function check(){
+  if(document.getElementById("p").value==="yes"){
+    alert("Working");
   } else {
-    alert("Wrong password 😜");
+    alert("Wrong");
   }
 }
-
-/* SLIDESHOW */
-const images=[
-  "IMG-20251210-WA0006.jpg",
-  "IMG-20260108-WA0003.jpg",
-  "IMG-20260108-WA0012.jpg"
-];
-let i=0;
-setInterval(()=>{
-  if(document.getElementById("slide")){
-    i=(i+1)%images.length;
-    document.getElementById("slide").src=images[i];
-  }
-},2000);
-
-/* NO BUTTON RUN */
-function moveNo(){
-  const btn=document.getElementById("noBtn");
-  btn.style.position="absolute";
-  btn.style.top=Math.random()*80+"%";
-  btn.style.left=Math.random()*80+"%";
-}
-
-/* FINAL */
-function finalLove(){
-  alert("I LOVE YOU FOREVER ❤️");
-}
-
-/* CREATE STARS */
-for(let s=0;s<50;s++){
-  const star=document.createElement("div");
-  star.classList.add("star");
-  star.style.top=Math.random()*100+"vh";
-  star.style.left=Math.random()*100+"vw";
-  document.body.appendChild(star);
-}
-
 </script>
 
 </body>
