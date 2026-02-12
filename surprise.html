@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever Us ❤️</title>
+
+<style>
+body{
+    margin:0;
+    background:linear-gradient(135deg,#ff416c,#ff4b2b);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+    font-family:Segoe UI;
+    color:white;
+    text-align:center;
+}
+
+h1{
+    font-size:40px;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);opacity:1;}
+    to{transform:translateY(-10vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div>
+    <h1>💖 I LOVE YOU FOREVER 💖</h1>
+    <h2>You are mine forever 😘</h2>
+</div>
+
+<audio autoplay loop>
+  <source src="Neelothi.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.innerText="💖";
+  heart.style.position="fixed";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(Math.random()*20+20)+"px";
+  heart.style.animation="float 4s linear";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),4000);
+},300);
+</script>
+
+</body>
+</html>
