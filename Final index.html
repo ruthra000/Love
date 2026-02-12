@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -8,8 +8,8 @@
 <style>
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg,#ff416c,#ff4b2b);
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#ff416c,#ff4b2b);
     display:flex;
     justify-content:center;
     align-items:center;
@@ -20,17 +20,16 @@ body{
 }
 
 .container{
-    background: rgba(255,255,255,0.15);
-    padding:30px;
+    background:rgba(255,255,255,0.15);
+    padding:25px;
     border-radius:20px;
-    backdrop-filter: blur(10px);
+    backdrop-filter:blur(10px);
     width:90%;
-    max-width:400px;
+    max-width:380px;
 }
 
 img{
-    width:90%;
-    max-width:300px;
+    width:100%;
     border-radius:20px;
     margin-bottom:15px;
 }
@@ -65,7 +64,9 @@ button{
 <body>
 
 <div class="container">
+
     <img id="slideshow" src="IMG-20251210-WA0006.jpg">
+
     <h1>For My Love ❤️</h1>
     <p>You mean the world to me ❤️ - Your Boy</p>
     <h2>Will you be mine forever? 💍</h2>
@@ -74,47 +75,49 @@ button{
     <button class="no" id="noBtn" onmouseover="moveNo()">NO 😜</button>
 
     <p id="countdown"></p>
+
 </div>
 
-<!-- 🎵 Background Song (Upload Neelothi.mp3 in repo) -->
-<audio id="bgSong" autoplay loop>
-  <source src="Neelothi.mp3" type="audio/mpeg">
+<!-- 🎵 NEELothi Song -->
+<audio id="bgMusic" loop>
+    <source src="Neelothi.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-/* Enable autoplay after first tap (mobile fix) */
-document.addEventListener("click", function(){
-  document.getElementById("bgSong").play();
-});
+/* 🎵 PLAY SONG ON FIRST TOUCH */
+window.addEventListener("click", function(){
+    const music=document.getElementById("bgMusic");
+    music.play();
+}, { once:true });
 
 /* YES BUTTON */
 function sayYes(){
   alert("Yayyy ❤️ I love youuuuu 😘");
 
-  const loveText = document.createElement("h1");
-  loveText.innerText = "I LOVE YOU ❤️";
-  loveText.style.position = "fixed";
-  loveText.style.top = "40%";
-  loveText.style.left = "50%";
-  loveText.style.transform = "translate(-50%, -50%)";
-  loveText.style.fontSize = "40px";
-  loveText.style.zIndex = "9999";
-  document.body.appendChild(loveText);
+  const love=document.createElement("h1");
+  love.innerText="I LOVE YOU ❤️";
+  love.style.position="fixed";
+  love.style.top="40%";
+  love.style.left="50%";
+  love.style.transform="translate(-50%,-50%)";
+  love.style.fontSize="40px";
+  love.style.zIndex="9999";
+  document.body.appendChild(love);
 
-  for(let i=0;i<30;i++){
-    const spark = document.createElement("div");
-    spark.innerText="🎆";
-    spark.style.position="fixed";
-    spark.style.left=Math.random()*100+"vw";
-    spark.style.top=Math.random()*100+"vh";
-    spark.style.fontSize="30px";
-    document.body.appendChild(spark);
-    setTimeout(()=>spark.remove(),2000);
+  for(let i=0;i<25;i++){
+    const fire=document.createElement("div");
+    fire.innerText="🎆";
+    fire.style.position="fixed";
+    fire.style.left=Math.random()*100+"vw";
+    fire.style.top=Math.random()*100+"vh";
+    fire.style.fontSize="28px";
+    document.body.appendChild(fire);
+    setTimeout(()=>fire.remove(),2000);
   }
 }
 
-/* NO BUTTON RUN AWAY */
+/* NO BUTTON RUN */
 function moveNo(){
   const btn=document.getElementById("noBtn");
   btn.style.position="absolute";
@@ -148,15 +151,16 @@ setInterval(()=>{
 },2000);
 
 /* COUNTDOWN */
-const targetDate=new Date("Feb 14, 2026 00:00:00").getTime();
+const target=new Date("Feb 14, 2026 00:00:00").getTime();
 setInterval(()=>{
   const now=new Date().getTime();
-  const distance=targetDate-now;
-  const days=Math.floor(distance/(1000*60*60*24));
-  document.getElementById("countdown").innerText="❤️ Our Special Day in: "+days+" days ❤️";
+  const diff=target-now;
+  const days=Math.floor(diff/(1000*60*60*24));
+  document.getElementById("countdown").innerText=
+  "❤️ Our Special Day in: "+days+" days ❤️";
 },1000);
 
 </script>
 
 </body>
-</html>
+ </html>
